@@ -5,8 +5,6 @@ def write_key():
     key = Fernet.generate_key()
     with open("key.key", "wb") as key_file:
         key_file.write(key)
-
-write_key()
 '''
 
 def load_key():
@@ -23,16 +21,16 @@ def view():
     with open("passwords.txt", "r") as f:
         for line in f.readlines():
             data = line.rstrip()
-            user, passcode = data.split("|")
-            print("User: ", user, "| Password: ",
-                fer.decrypt(passcode.encode()).decode())
+            user, passcode, number = data.split("|")
+            print("User: ", user, "| Password: ", fer.decrypt(passcode.encode()).decode(), "| Phone number: ", 
+            fer.decrypt(number.encode()).decode())
  
 def add(): 
     name = input("Account name: ")
     password = input("Password: ")
- 
+    phone_number = input("Phone number: ")
     with open("passwords.txt", "a") as f:
-        f.write(name + "|" + fer.encrypt(password.encode()).decode() + "\n")
+        f.write(name + "|" + fer.encrypt(password.encode()).decode() + "|"+ fer.encrypt(phone_number.encode()).decode() + "\n")
 
 while True:
     mode = input("Would you like to add a new password or view existing ones (add, view)? Or type 'q' to quit: ")
