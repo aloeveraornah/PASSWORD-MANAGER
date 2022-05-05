@@ -1,3 +1,4 @@
+from cryptography.fernet import Fernet
 
 #the multi line comments below are used to create and open another file that holds the encryption for the master password
 '''
